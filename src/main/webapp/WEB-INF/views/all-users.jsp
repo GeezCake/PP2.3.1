@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>All Users</title>
@@ -22,14 +23,17 @@
             <td>${user.lastName}</td>
             <td>${user.email}</td>
             <td>
-                <a href="update?id=${user.id}">Edit</a>
-                <a href="delete?id=${user.id}" onclick="return confirm('Are you sure?')">Delete</a>
+                <a href="/update?id=${user.id}">Edit</a>
+                <form:form action="/delete" method="post" style="display:inline;">
+                    <input type="hidden" name="id" value="${user.id}">
+                    <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                </form:form>
             </td>
         </tr>
     </c:forEach>
 </table>
 <br/>
-<a href="add">Add New User</a>
+<a href="/add">Add New User</a>
 
 </body>
 </html>
